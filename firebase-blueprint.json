@@ -1,0 +1,151 @@
+{
+  "entities": {
+    "ProjectComment": {
+      "title": "ProjectComment",
+      "description": "User comment or question on an engineering project showcase.",
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string",
+          "description": "Slug or ID of the engineering project.",
+          "maxLength": 128
+        },
+        "userId": {
+          "type": "string",
+          "description": "Firebase Auth UID of the author.",
+          "maxLength": 128
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the user.",
+          "maxLength": 120
+        },
+        "photoURL": {
+          "type": "string",
+          "description": "Avatar URL of the user.",
+          "maxLength": 500
+        },
+        "body": {
+          "type": "string",
+          "description": "Comment message content.",
+          "minLength": 3,
+          "maxLength": 1000
+        },
+        "parentId": {
+          "type": "string",
+          "description": "Parent comment ID for nested replies, or null for root comments.",
+          "maxLength": 128
+        },
+        "status": {
+          "type": "string",
+          "description": "Moderation status.",
+          "enum": ["pending", "approved", "rejected"]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of creation."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of last update."
+        }
+      },
+      "required": ["projectId", "userId", "displayName", "body", "status", "createdAt"]
+    },
+    "ProjectIdea": {
+      "title": "ProjectIdea",
+      "description": "Technical suggestion or idea proposal for an engineering project.",
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string",
+          "description": "Slug or ID of the engineering project.",
+          "maxLength": 128
+        },
+        "userId": {
+          "type": "string",
+          "description": "Firebase Auth UID of the author.",
+          "maxLength": 128
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the user.",
+          "maxLength": 120
+        },
+        "photoURL": {
+          "type": "string",
+          "description": "Avatar URL of the user.",
+          "maxLength": 500
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of the proposed feature or improvement.",
+          "minLength": 5,
+          "maxLength": 120
+        },
+        "body": {
+          "type": "string",
+          "description": "Technical details and reasoning for the proposal.",
+          "minLength": 10,
+          "maxLength": 2000
+        },
+        "status": {
+          "type": "string",
+          "description": "Moderation status.",
+          "enum": ["pending", "approved", "rejected"]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of creation."
+        }
+      },
+      "required": ["projectId", "userId", "displayName", "title", "body", "status", "createdAt"]
+    },
+    "CommentReport": {
+      "title": "CommentReport",
+      "description": "Flag for moderator review of inappropriate content.",
+      "type": "object",
+      "properties": {
+        "commentId": {
+          "type": "string",
+          "description": "Target comment ID.",
+          "maxLength": 128
+        },
+        "reporterId": {
+          "type": "string",
+          "description": "UID of reporting user.",
+          "maxLength": 128
+        },
+        "reason": {
+          "type": "string",
+          "description": "Reason for the report.",
+          "minLength": 5,
+          "maxLength": 500
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of report creation."
+        }
+      },
+      "required": ["commentId", "reporterId", "reason", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/projectComments/{commentId}": {
+      "schema": { "$ref": "#/entities/ProjectComment" },
+      "description": "Stores user comments and replies on engineering projects."
+    },
+    "/projectIdeas/{ideaId}": {
+      "schema": { "$ref": "#/entities/ProjectIdea" },
+      "description": "Stores user suggestions and engineering improvement ideas."
+    },
+    "/commentReports/{reportId}": {
+      "schema": { "$ref": "#/entities/CommentReport" },
+      "description": "Stores flags and reports on inappropriate comments."
+    }
+  }
+}
