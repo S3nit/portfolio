@@ -7,17 +7,25 @@
   --wood: url("./walnut.webp");
   position: relative;
   width: min(100%, 652px);
-  padding: 8px;
-  background: linear-gradient(90deg,#130d09aa,transparent 2%,transparent 98%,#190f0d88),var(--wood) center/cover;
-  border: 1px solid #65513b;
-  border-bottom: 6px solid #302219;
-  border-radius: 12px 12px 8px 8px;
-  box-shadow: 0 15px 27px -12px #000, inset 0 2px 2px #b89b775b;
+  padding: 13px clamp(8px,2vw,14px) 12px;
+  background:linear-gradient(90deg,#160e0866,#e3b07922 1%,transparent 3%,transparent 97%,#0f090777),var(--wood) center/cover;
+  border:1px solid #654b35; border-bottom:5px solid #39271b; border-radius:4px;
+  box-shadow:inset 1px 1px 1px #edcfa680,inset -2px -2px 3px #1c120c,4px 17px 22px -10px #070605;
+}
+.cabinet::after {
+  content:""; position:absolute; pointer-events:none; left:-3px; right:-3px; top:-5px; height:10px;
+  border-radius:3px 3px 2px 2px; border-top:1px solid #c49b74;
+  background:linear-gradient(#d7ad762b,transparent 35%,#23130d94 85%),var(--wood) 50% 38%/100% auto;
+  box-shadow:0 2px 3px #160d0a99;
 }
 .shelf {
-  position: relative;
-  background: linear-gradient(180deg,#0c0809d9 0%,#17110ea8 24%,#231e191c 82%,#1c130ed9 100%),var(--wood) center/100% 100%;
-  box-shadow: inset 7px 0 13px #100b099e,inset -7px 0 13px #100b099e;
+  position:relative;
+  background:linear-gradient(165deg,#30201136,#180d0875),var(--wood) 50% 62%/auto 155%;
+  box-shadow:inset 0 12px 18px -6px #100907ed,inset 8px 0 13px -5px #1b0e09bf,inset -12px 0 16px -5px #110a07c7;
+}
+.shelf::before {
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:linear-gradient(90deg,#dcae7333,#3c26162b 2%,transparent 2.2%,transparent 97.8%,#24150e66 98%,#120b0780);
 }
 .book-row {
   display: flex; justify-content: space-evenly; align-items: flex-end;
@@ -27,8 +35,8 @@
 }
 .book-row::before {
   content:""; position:absolute; z-index:-1; inset:auto 0 0; height:24px;
-  background:linear-gradient(#150e0966,#89745444 88%,#bb957b99),var(--wood) center/100% auto;
-  clip-path: polygon(2% 0,98% 0,100% 100%,0 100%);
+  background:linear-gradient(#24150860,#b5865a26 60%,#dfb48959),var(--wood) 50% 73%/100% 75px;
+  clip-path:polygon(2.2% 0,97.8% 0,100% 100%,0 100%);
 }
 .shelf-label {
   position: relative;
@@ -57,8 +65,8 @@
   border-radius:50%; background:#110b08; filter:blur(4px); opacity:.83;
 }
 .book-body {
-  position:absolute; inset:0; transform-style:preserve-3d;
-  transform:rotateX(4deg) rotateY(var(--angle));
+  position:absolute; inset:0; transform-style:preserve-3d; transform-origin:50% 100%;
+  transform:rotateY(var(--angle)) rotateX(5deg) rotateZ(var(--lean,0deg));
   transition:transform .35s cubic-bezier(.2,.75,.22,1);
 }
 @media (hover:hover) {
@@ -71,7 +79,9 @@
   inset:0; border-radius:2px 4px 4px 2px;
   background-color:var(--cloth);
 }
-.book-back { box-shadow:0 2px 2px #0a0604; }
+.book-back { box-shadow:3px 3px 3px #170c08b8,6px 5px 8px #160d095c; }
+.book-row > .volume:nth-child(3n) { --lean:2deg; }
+.book-row > .volume:nth-child(3n + 1) { --lean:-2deg; }
 .book-face {
   transform:translateZ(var(--depth));
   display:flex; flex-direction:column; justify-content:space-between; align-items:center;
@@ -82,6 +92,11 @@
   box-shadow:inset 0 0 1px 1px #fff3;
 }
 .book-face::before { content:""; position:absolute; inset:5% 6% 5% 10%; border:1px solid currentColor; opacity:.51; }
+.book-face::after {
+  content:""; position:absolute; inset:0; pointer-events:none; border-radius:inherit;
+  background:linear-gradient(90deg,#100a065c,transparent 3%,#fff3 4%,#1b120b38 6%,transparent 9%,transparent 98%,#140c0738);
+  box-shadow:inset 0 1px 0 #fff4,inset 0 -1px 0 #2c1e1466;
+}
 .cover-title { font:400 clamp(12px,2.1vw,19px)/1.04 Georgia,serif; letter-spacing:-.045em; text-wrap:balance; text-shadow:0 1px 1px #0007; }
 .cover-figure { width:80%; height:45%; fill:none; stroke:currentColor; stroke-width:1.05; opacity:.94; }
 .book-edge,.book-spine {
@@ -108,7 +123,7 @@
 .pocket .cover-figure { width:75%; height:19px; stroke-width:3; flex:none; }
 .pocket:nth-child(5) { height:clamp(91px,15vw,125px); }
 .cabinet::before {
-  content:""; position:absolute; right:25px; bottom:100%; width:57px; height:33px;
+  content:""; position:absolute; right:25px; bottom:calc(100% + 4px); width:57px; height:33px;
   background:url("./shelf-cat.svg") center bottom / contain no-repeat;
 }
 @media (max-width:460px) {
@@ -178,20 +193,32 @@
   background:#2a201a; scroll-margin-top:12px;
 }
 .drawer + .drawer { margin-top:5px; }
-.book-collection { --tab-color:#c6bada; }
-.screen-collection { --tab-color:#e0b69c; }
+.book-collection { --tab-color:#c6bada; --grain-y:58%; }
+.screen-collection { --tab-color:#e0b69c; --grain-y:86%; }
 .drawer summary {
-  list-style:none; display:flex; align-items:center; gap:12px; min-height:54px;
+  position:relative; list-style:none; display:flex; align-items:center; gap:12px; min-height:54px;
   padding:10px 15px; cursor:pointer; color:#f4e9d7;
-  background:linear-gradient(90deg,#372d24ed,#42362de3),var(--wood) center/cover;
+  background:linear-gradient(90deg,#2a1c14c7,#32201482 65%,#120c0859),var(--wood) center var(--grain-y,32%)/100% auto;
+  box-shadow:inset 0 1px #e2b78961,inset 1px 0 #cf9d6d38,inset 0 -3px 4px #180d087a;
+  text-shadow:0 1px 2px #21150f;
   font:500 18px/1.25 Georgia,serif;
 }
 .drawer summary::-webkit-details-marker { display:none; }
-.drawer summary::after {
-  content:""; margin-left:auto; width:7px; height:7px; flex:none;
-  border:solid #d4c5af; border-width:0 1.5px 1.5px 0; transform:rotate(45deg);
+/* A shallow brass cup catches the light along its rolled front edge. */
+.drawer summary::before {
+  content:""; position:absolute; right:18px; top:50%; width:32px; height:12px;
+  transform:translateY(-50%); border-radius:55% 55% 4px 4px / 100% 100% 4px 4px;
+  border:1px solid #523d25;
+  background:radial-gradient(ellipse at 32% 14%,#f1d7a58c,transparent 41%),
+    linear-gradient(172deg,#bd9a64,#927346 41%,#60492f 65%,#3e301f 79%,#c8a573 93%);
+  box-shadow:inset 0 1px #f3d5a28c,0 2px 0 #21170f,1px 4px 4px #140c087a;
 }
-.drawer[open] summary::after { transform:rotate(225deg); }
+.drawer summary::after {
+  content:""; margin-left:auto; width:48px; height:16px; flex:none;
+  border-radius:45%; background:
+    radial-gradient(circle at 8% 57%,#463320 0 1px,#b7986c 1.5px,transparent 2.6px),
+    radial-gradient(circle at 92% 57%,#463320 0 1px,#b7986c 1.5px,transparent 2.6px);
+}
 .drawer summary:focus-visible { outline:2px solid var(--tab-color); outline-offset:-4px; }
 .drawer summary small { display:block; margin-top:2px; color:#d3c7b7; font:12px/1.4 Arial,sans-serif; }
 .drawer-tab {
@@ -200,16 +227,25 @@
 }
 .drawer[open] summary { border-bottom:1px solid #6b5644; }
 #intended-to-read .book-row {
-  display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); align-items:start;
-  gap:clamp(5px,2vw,18px); padding:20px clamp(8px,4vw,36px) 14px;
+  display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); grid-template-rows:auto auto; align-items:start;
+  column-gap:clamp(5px,2vw,18px); row-gap:0; padding:24px clamp(8px,4vw,36px) 0;
 }
-#intended-to-read .book-row::before { display:none; }
-.reading-pick { min-width:0; display:grid; justify-items:center; align-content:start; gap:9px; }
+#intended-to-read .book-row::before {
+  grid-row:1; grid-column:1 / -1; left:calc(-1 * clamp(8px,4vw,36px)); right:calc(-1 * clamp(8px,4vw,36px));
+}
+#intended-to-read .book-row::after {
+  content:""; position:absolute; z-index:-1; grid-row:2; inset:0;
+  background:linear-gradient(#d7ad7e55,#38251688 9%,#2e1c14ae),var(--wood) center 88%/100% auto;
+  border-top:1px solid #b49069; box-shadow:inset 0 -3px 4px #1c100a8c;
+}
+.reading-pick { min-width:0; display:grid; grid-row:span 2; grid-template-rows:subgrid; justify-items:center; align-items:end; }
+.reading-pick:first-child { --lean:-2deg; }
+.reading-pick:last-child { --lean:2deg; }
 #intended-to-read .volume {
-  width:min(78%,83px); max-width:none; height:auto; min-height:0; aspect-ratio:3/4;
+  margin-bottom:6px; width:min(78%,90px); max-width:none; height:auto; min-height:0; aspect-ratio:3/4;
 }
 .book-caption {
-  color:#f1e5d1; cursor:pointer; text-align:center; text-wrap:balance;
+  align-self:start; padding:8px 1px; color:#f1e5d1; cursor:pointer; text-align:center; text-wrap:balance;
   font:500 clamp(12px,1.6vw,14px)/1.35 Georgia,serif;
 }
 #intended-to-read .book-body::before {
