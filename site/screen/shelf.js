@@ -1,4 +1,4 @@
-import { movies, anime } from "./picks.js";
+import { movies, tvSeries, anime } from "./picks.js";
 
 const shelf = document.querySelector("#screen-shelf");
 const viewer = document.querySelector("#screen-viewer");
@@ -22,19 +22,19 @@ function artwork(pick, className) {
 }
 
 function openPick(pick, kind) {
-  viewer.classList.toggle("view-anime", kind === "anime");
+  viewer.dataset.kind = kind;
   const body = node("div", "pick-text");
   const title = node("h3", "pick-title", pick.title);
   title.id = "pick-title";
-  body.append(node("p", "pick-meta", [kind === "anime" ? "Anime" : "Cinema ticket", pick.year].filter(Boolean).join(" · ")), title);
+  body.append(node("p", "pick-meta", [{anime: "Anime", tv: "TV series", movies: "Cinema ticket"}[kind], pick.year].filter(Boolean).join(" · ")), title);
   if (pick.synopsis) body.append(node("p", "pick-synopsis", pick.synopsis));
   if (pick.character) body.append(node("p", "pick-character", "Favorite character · " + pick.character));
   if (pick.personalNote) {
     body.append(node("h4", "pick-note-heading", "Why I love it"), node("p", "pick-note", pick.personalNote));
   }
-  if (pick.trailer) {
-    const link = node("a", "pick-trailer", "Official trailer ↗");
-    link.href = pick.trailer;
+  if (pick.trailer || pick.officialPage) {
+    const link = node("a", "pick-trailer", pick.trailer ? "Watch trailer ↗" : "Title page ↗");
+    link.href = pick.trailer || pick.officialPage;
     link.target = "_blank";
     link.rel = "noopener noreferrer";
     body.append(link);
@@ -65,5 +65,6 @@ function addRow(label, kind, picks) {
 }
 
 addRow("Movies", "movies", movies);
+addRow("TV Series", "tv", tvSeries);
 addRow("Anime", "anime", anime);
-shelf.hidden = !(movies.length || anime.length);
+shelf.hidden = !(movies.length || tvSeries.length || anime.length);
