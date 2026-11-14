@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; script-src 'self'; img-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <meta name="referrer" content="no-referrer">
+  <meta name="color-scheme" content="dark">
+  <title>Signal explorer · Senithu Sethmin Warnakulasooriya</title>
+  <link rel="icon" href="../../mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../style.css">
+  <script defer src="../../projects.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header>
+    <div class="bar">
+      <a class="brand" href="../../index.html" aria-label="S3n;t, home">S3n<span class="accent">;</span>t</a>
+      <nav aria-label="Main navigation">
+        <a href="../../index.html">Myself</a>
+        <a href="../../blogs.html">Blogs</a>
+        <a href="../../projects.html" aria-current="location">Projects</a>
+        <a href="../../education.html">Education</a>
+        <a href="../../contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main" class="inner">
+    <h1>Signal explorer</h1>
+<article class="project-body">
+<p>An interactive sine wave that shows how frequency and amplitude change a signal over one second.</p>
+<h2>Try the explorer</h2>
+<p>Move the frequency slider to change how many cycles fit in the window. Move the amplitude slider to change the wave’s height.</p>
+<div class="lab"><svg id="scope" viewBox="0 0 640 160" role="img" aria-label="A sine wave over a one-second window"><path class="axis" d="M0 80H640 M160 0V160 M320 0V160 M480 0V160"/><path id="trace"/></svg><div class="controls"><label>Frequency <output id="hz" for="frequency">2 Hz</output><input id="frequency" type="range" min="1" max="8" value="2" step=".5"></label><label>Amplitude <output id="volts" for="amplitude">1 V</output><input id="amplitude" type="range" min=".1" max="1" value="1" step=".1"></label></div></div>
+<h2>How it works</h2>
+<p>The plot samples the equation <code>v(t) = A sin(2πft)</code>. Frequency (<code>f</code>) is measured in hertz, amplitude (<code>A</code>) in volts, and time (<code>t</code>) in seconds.</p>
+<ul>
+<li>At 2 Hz, two complete cycles fit in the window.</li>
+<li>At 4 Hz, each cycle takes a quarter of a second.</li>
+<li>At 0.5 V, the peaks are half as tall as they are at 1 V.</li>
+</ul>
+</article>
+  </main>
+</body>
+</html>
