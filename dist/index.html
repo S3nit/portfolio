@@ -9,6 +9,8 @@
   <title>Myself · Senithu Sethmin Warnakulasooriya</title>
   <link rel="icon" href="./mark.svg" type="image/svg+xml">
   <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./library/library.css">
+  <script type="module" src="./library/library.js"></script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -29,6 +31,7 @@
       <h1>Senithu Sethmin<br>Warnakulasooriya<span class="accent">.</span></h1>
       <p>I’m an electrical and electronics engineering undergraduate exploring circuits, signals, and the systems that connect them.</p>
       <a class="text-link" href="./projects.html">View projects <span aria-hidden="true">↗</span></a>
+      <a class="text-link library-jump" href="#library">Library <span aria-hidden="true">↓</span></a>
     </div>
     <section class="skills" aria-labelledby="skills-title">
       <h2 id="skills-title">Skills</h2>
@@ -51,6 +54,31 @@
         </div>
       </div>
     </section>
+    <section class="library" id="library" aria-labelledby="library-title">
+      <h2 id="library-title">Library<span class="accent">.</span></h2>
+      <p>Choose a book from the shelf to read it.</p>
+      <div class="cabinet" id="bookcase"></div>
+      <noscript>The interactive bookshelf requires JavaScript.</noscript>
+    </section>
+    <dialog id="reader" aria-labelledby="reader-title">
+      <div class="reader-toolbar"><span>Library</span><button type="button" id="close-book" autofocus>Close book <span aria-hidden="true">×</span></button></div>
+      <div class="spread">
+        <div class="frontispiece">
+          <span id="reader-shelf"></span>
+          <h2 id="reader-title"></h2>
+          <span class="title-rule"></span>
+          <p id="reader-subtitle"></p>
+        </div>
+        <div class="leaf" id="leaf" tabindex="0" role="region" aria-labelledby="chapter-title">
+          <div id="chapter"><h3 id="chapter-title"></h3><div id="chapter-text"></div></div>
+        </div>
+      </div>
+      <div class="reader-controls">
+        <button type="button" id="previous-page" aria-label="Previous page">← Previous</button>
+        <span id="page-number" aria-live="polite" aria-atomic="true"></span>
+        <button type="button" id="next-page" aria-label="Next page">Next →</button>
+      </div>
+    </dialog>
   </main>
 </body>
 </html>
