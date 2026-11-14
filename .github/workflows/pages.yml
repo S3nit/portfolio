@@ -16,7 +16,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - uses: actions/configure-pages@v5
       - name: Install Markdown renderer
         run: sudo apt-get update && sudo apt-get install -y pandoc
       - name: Build portfolio
