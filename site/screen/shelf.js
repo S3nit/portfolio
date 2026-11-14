@@ -45,8 +45,10 @@ function openPick(pick, kind) {
 
 function addRow(label, kind, picks) {
   if (!picks.length) return;
-  const section = node("section", "screen-row " + kind);
-  const heading = node("h3", "screen-label", label);
+  const section = node("section", "shelf screen-row " + kind);
+  const heading = node("h3", "shelf-label", label);
+  heading.id = kind + "-shelf-title";
+  section.setAttribute("aria-labelledby", heading.id);
   const rack = node("div", "screen-rack");
   for (const pick of picks) {
     const button = node("button", "screen-case");
@@ -60,7 +62,7 @@ function addRow(label, kind, picks) {
     button.addEventListener("click", () => openPick(pick, kind));
     rack.append(button);
   }
-  section.append(heading, rack);
+  section.append(rack, heading);
   shelf.append(section);
 }
 

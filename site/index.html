@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; script-src 'self'; img-src 'self' https://artworks.thetvdb.com https://image.tmdb.org https://japanesegallery.com https://s3.amazonaws.com https://www.crank-in.net https://images.penguinrandomhouse.com https://images.macmillan.com https://d28hgpri8am2if.cloudfront.net; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; script-src 'self'; img-src 'self' https://learning.oreilly.com https://artworks.thetvdb.com https://image.tmdb.org https://japanesegallery.com https://s3.amazonaws.com https://www.crank-in.net https://images.penguinrandomhouse.com https://images.macmillan.com https://d28hgpri8am2if.cloudfront.net; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'">
   <meta name="referrer" content="no-referrer">
   <meta name="color-scheme" content="dark">
   <title>Myself · Senithu Sethmin Warnakulasooriya</title>
@@ -58,12 +58,12 @@
     </section>
     <section class="library" id="library" aria-labelledby="library-title">
       <h2 id="library-title">Library<span class="accent">.</span></h2>
-      <p>Choose a book from the shelf to read it.</p>
-      <div class="cabinet" id="bookcase"></div>
+      <p>Pick a book to open it, or pull out a case for viewing notes.</p>
+      <div class="cabinet" id="bookcase">
+        <div id="book-shelves"></div>
+        <div id="screen-shelf"></div>
+      </div>
       <noscript>The interactive bookshelf requires JavaScript.</noscript>
-    </section>
-    <section id="screen-shelf" class="screen-shelf" aria-labelledby="screen-title" hidden>
-      <h2 id="screen-title">Screen Shelf<span class="accent">.</span></h2>
     </section>
     <dialog id="screen-viewer" class="screen-viewer" aria-labelledby="pick-title">
       <form method="dialog"><button aria-label="Close viewing notes" autofocus>Close ×</button></form>

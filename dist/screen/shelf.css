@@ -1,16 +1,37 @@
-.screen-shelf { margin-top:clamp(38px,6vw,72px); padding-top:22px; border-top:1px solid var(--line); }
-.screen-shelf > h2 { font:400 clamp(37px,5vw,55px)/1 Georgia,serif; letter-spacing:-.065em; }
-.screen-row { width:min(100%,652px); margin-top:24px; }
-.screen-label { font:500 14px/1.4 Arial,sans-serif; color:var(--muted); margin:0 0 10px; }
-.screen-rack { display:grid; grid-template-columns:repeat(auto-fill,minmax(76px,1fr)); align-items:start; gap:16px 12px; padding:12px 8px 14px; border-bottom:3px solid #51493c; }
-.screen-case { width:100%; max-width:110px; padding:0; color:var(--text); border:0; background:transparent; cursor:pointer; text-align:left; perspective:650px; }
+.screen-rack {
+  display:grid; grid-auto-flow:column; grid-auto-columns:minmax(65px,1fr);
+  align-items:start; gap:clamp(8px,1.5vw,13px); padding:20px 15px 8px;
+  overflow-x:auto; overscroll-behavior-x:contain; scroll-snap-type:x proximity;
+  scrollbar-width:thin; scrollbar-color:#977953 #2c211a;
+}
+.screen-case {
+  width:100%; max-width:85px; justify-self:center; padding:0; color:#f2e8d6;
+  border:0; background:transparent; cursor:pointer; text-align:center;
+  perspective:650px; scroll-snap-align:center;
+}
 .screen-case:focus-visible,.screen-viewer button:focus-visible { outline:2px solid var(--green); outline-offset:4px; }
 .screen-sleeve { position:relative; display:block; height:auto; aspect-ratio:2/3; transform:rotateY(-9deg); transform-origin:left center; transition:transform .25s ease; background:#333730; border:2px solid #484942; border-left:5px solid #262923; border-radius:4px; box-shadow:3px 4px 6px #0008; }
 .screen-poster { display:block; width:100%; height:100%; object-fit:cover; }
-.poster-fallback { display:grid; place-items:center; padding:6px; background:#344d48; color:#fff0ca; text-align:center; font:15px/1.16 Georgia,serif; }
-.screen-caption { display:block; margin-top:8px; font:12px/1.35 Arial,sans-serif; }
+.poster-fallback { overflow:hidden; overflow-wrap:anywhere; display:grid; place-items:center; padding:6px; background:#344d48; color:#fff0ca; text-align:center; font:15px/1.16 Georgia,serif; }
+.screen-caption { display:block; margin-top:6px; font:12px/1.25 Arial,sans-serif; text-shadow:0 1px 3px #160d06; }
+.movies .screen-sleeve {
+  border:solid #25201b; border-width:5px 2px 5px 4px;
+}
+.movies .screen-sleeve::before, .movies .screen-sleeve::after {
+  content:""; position:absolute; inset:-4px 2px auto; height:2px;
+  background:repeating-linear-gradient(90deg,#c8bda6 0 3px,transparent 3px 8px);
+}
+.movies .screen-sleeve::after { top:auto; bottom:-4px; }
+.tv .screen-sleeve {
+  border:solid #30383b; border-width:3px 3px 6px 7px; border-radius:4px 7px 6px 3px;
+  box-shadow:-2px 0 #788281,2px 2px #101719,4px 5px 6px #0008;
+}
+.tv .screen-sleeve::after {
+  content:""; position:absolute; right:3px; bottom:-4px; width:12px; height:2px;
+  background:repeating-linear-gradient(90deg,#a5aaa6 0 2px,transparent 2px 4px);
+}
 .anime .screen-sleeve { transform:rotateY(-32deg); border-left:0; }
-.box-spine { position:absolute; right:100%; top:0; bottom:0; width:16px; writing-mode:vertical-rl; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; padding:6px 2px; background:#777b69; color:#171915; font:10px/1 Georgia,serif; }
+.box-spine { position:absolute; right:100%; top:0; bottom:0; width:10px; writing-mode:vertical-rl; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; padding:6px 2px; background:#777b69; color:#171915; font:9px/1 Georgia,serif; }
 .screen-case:focus-visible .screen-sleeve { transform:translateY(-3px) rotateY(-2deg); }
 @media (hover:hover) { .screen-case:hover .screen-sleeve { transform:translateY(-3px) rotateY(-2deg); } }
 @media (prefers-reduced-motion:reduce) { .screen-sleeve { transition:none; } }

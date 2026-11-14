@@ -170,3 +170,11 @@
   .frontispiece:has(#reader-cover:not([hidden])) { display:grid; grid-template-columns:auto 1fr; column-gap:12px; align-content:center; }
   #reader-cover { grid-row:1 / 3; height:55px; margin:0; }
 }
+
+#intended-to-read .book-row { justify-content:center; gap:clamp(12px,4vw,30px); }
+#intended-to-read .volume { aspect-ratio:3/4; }
+#intended-to-read .book-body::before {
+  content:""; position:absolute; top:-7px; right:14%; width:9px; height:14px;
+  background:linear-gradient(90deg,#926d3e,#e0be79 45%,#bf9759);
+  clip-path:polygon(0 0,100% 0,100% 100%,50% 75%,0 100%);
+}

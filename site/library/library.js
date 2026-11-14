@@ -1,7 +1,8 @@
 import { shelves as engineeringShelves } from "./books.js";
 import { fantasyShelf } from "./fantasy.js";
+import { intendedShelf } from "./intended.js";
 
-const cabinet = document.querySelector("#bookcase");
+const cabinet = document.querySelector("#book-shelves");
 const reader = document.querySelector("#reader");
 const leaf = document.querySelector("#leaf");
 const previous = document.querySelector("#previous-page");
@@ -42,7 +43,7 @@ function makeCover(book) {
   const button = element("button", "volume " + book.binding);
   button.type = "button";
   if (book.pocket) button.classList.add("pocket");
-  button.setAttribute("aria-label", (book.order ? "Series guide: " : "Read ") + book.title);
+  button.setAttribute("aria-label", (book.order ? "Series guide: " : "Open ") + book.title);
   button.setAttribute("aria-haspopup", "dialog");
   const body = element("span", "book-body");
   body.setAttribute("aria-hidden", "true");
@@ -53,8 +54,8 @@ function makeCover(book) {
     image.referrerPolicy = "no-referrer";
     image.addEventListener("error", () => image.remove(), { once: true });
     image.src = book.coverImage;
-    face.append(element("span", "cover-title", book.order[0]), image);
-    button.title = book.order[0] + " · " + book.title;
+    face.append(element("span", "cover-title", book.order?.[0] || book.title), image);
+    button.title = book.order ? book.order[0] + " · " + book.title : book.title;
   } else {
     const figure = document.createElementNS(ns, "svg");
     figure.setAttribute("viewBox", "0 0 90 72");
@@ -82,18 +83,19 @@ function showPage() {
   document.querySelector("#chapter-title").textContent = heading;
   document.querySelector("#chapter-text").replaceChildren(...paragraphs.map(text => element("p", "", text)));
   const content = document.querySelector("#chapter-text");
-  if (isGuide) {
-    if (page === 1) {
-      const list = element("ol", "reading-order");
-      for (const title of current.order) list.append(element("li", "", title));
-      content.append(list);
-    }
-    const link = element("a", "author-link", "Official book page ↗");
+  if (isGuide && page === 1) {
+    const list = element("ol", "reading-order");
+    for (const title of current.order) list.append(element("li", "", title));
+    content.append(list);
+  }
+  if (current.url) {
+    const link = element("a", "author-link", isGuide ? "Official book page ↗" : "View at O’Reilly ↗");
     link.href = current.url;
     link.target = "_blank";
     link.rel = "noopener noreferrer";
     content.append(link);
   }
+  document.querySelector(".reader-controls").hidden = pageCount === 1;
   number.textContent = `Page ${page + 1} of ${pageCount}`;
   previous.disabled = page === 0;
   next.disabled = page === pageCount - 1;
@@ -105,12 +107,12 @@ function openBook(book, shelf, button) {
   opener = button;
   page = 0;
   document.querySelector("#reader-title").textContent = book.title;
-  document.querySelector("#reader-shelf").textContent = book.author ? book.author + " · Series guide" : shelf;
+  document.querySelector("#reader-shelf").textContent = book.author ? book.author + " · " + (book.order ? "Series guide" : shelf) : shelf;
   document.querySelector("#reader-subtitle").textContent = book.subtitle || "A spoiler-free reading guide.";
   const cover = document.querySelector("#reader-cover");
   cover.hidden = !book.coverImage;
   if (book.coverImage) {
-    cover.alt = book.order[0] + " cover";
+    cover.alt = (book.order?.[0] || book.title) + " cover";
     cover.src = book.coverImage;
   } else {
     cover.removeAttribute("src");
@@ -142,6 +144,7 @@ function renderShelves(shelves) {
   cabinet.replaceChildren();
   for (const shelf of shelves) {
     const row = element("section", "shelf");
+    if (shelf.id) row.id = shelf.id;
     const label = element("h3", "shelf-label", shelf.name);
     const group = element("div", "book-row");
     for (const book of shelf.books) {
@@ -154,7 +157,7 @@ function renderShelves(shelves) {
   }
 }
 
-renderShelves([fantasyShelf, ...engineeringShelves]);
+renderShelves([fantasyShelf, intendedShelf, ...engineeringShelves]);
 previous.addEventListener("click", () => turn(-1));
 next.addEventListener("click", () => turn(1));
 document.querySelector("#close-book").addEventListener("click", () => reader.close());
