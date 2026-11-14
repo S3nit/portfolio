@@ -57,6 +57,10 @@
     <section class="library" id="library" aria-labelledby="library-title">
       <h2 id="library-title">Library<span class="accent">.</span></h2>
       <p>Choose a book from the shelf to read it.</p>
+      <div class="library-choices" role="group" aria-label="Book collection">
+        <button type="button" data-collection="fantasy" aria-pressed="true" aria-controls="bookcase">Fantasy</button>
+        <button type="button" data-collection="engineering" aria-pressed="false" aria-controls="bookcase">Engineering</button>
+      </div>
       <div class="cabinet" id="bookcase"></div>
       <noscript>The interactive bookshelf requires JavaScript.</noscript>
     </section>

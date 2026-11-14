@@ -159,3 +159,9 @@
 @media (prefers-reduced-motion:reduce) {
   .book-body { transition:none; }
 }
+.library-choices { display:flex; gap:6px; margin:-12px 0 24px; }
+.library-choices button { font:inherit; font-size:14px; padding:6px 13px; border:1px solid var(--line); background:transparent; color:var(--muted); border-radius:20px; cursor:pointer; }
+.library-choices button[aria-pressed="true"] { background:#d8e4cf; color:#20261c; }
+.library-choices button:focus-visible { outline:2px solid var(--green); outline-offset:2px; }
+.reading-order { padding-left:1.55em; margin:0 0 1em; line-height:1.6; }
+.author-link { display:inline-block; color:#39553c; text-decoration:underline; text-underline-offset:3px; font-family:Georgia,serif; }
