@@ -7,6 +7,7 @@
   --wood: url("./walnut.webp");
   position: relative;
   width: min(100%, 652px);
+  margin-inline: auto;
   padding: 13px clamp(8px,2vw,14px) 12px;
   background:linear-gradient(90deg,#160e0866,#e3b07922 1%,transparent 3%,transparent 97%,#0f090777),var(--wood) center/cover;
   border:1px solid #654b35; border-bottom:5px solid #39271b; border-radius:4px;
