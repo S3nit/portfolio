@@ -1,5 +1,5 @@
 import { shelves as engineeringShelves } from "./books.js";
-import { fantasyShelves } from "./fantasy.js";
+import { fantasyShelf } from "./fantasy.js";
 
 const cabinet = document.querySelector("#bookcase");
 const reader = document.querySelector("#reader");
@@ -10,12 +10,6 @@ const number = document.querySelector("#page-number");
 
 const ns = "http://www.w3.org/2000/svg";
 const motifs = {
-  trident: "M45 63V12 M23 19V31Q23 42 45 42Q67 42 67 31V19 M18 24L23 16L28 24 M39 18L45 9L51 18 M62 24L67 16L72 24",
-  rune: "M45 63V10L61 24L45 35L65 48L45 59 M32 16L25 22L32 28",
-  clock: "M45 12A24 24 0 1 1 44.9 12Z M45 16V20 M65 36H61 M45 56V52 M25 36H29 M45 23V36L56 43 M38 8H52",
-  sun: "M45 23A13 13 0 1 1 44.9 23Z M45 7V16 M45 56V65 M16 36H25 M65 36H74 M25 16L31 22 M59 50L65 56 M25 56L31 50 M59 22L65 16",
-  crow: "M13 53L37 29Q41 15 53 19L61 25L73 29L61 31Q59 47 43 50L25 56L34 46Z M42 50L40 59 M50 48L49 57 M35 60H45",
-  crown: "M19 26L33 36L45 17L57 36L71 26L65 51H25Z M25 57H65",
   loop: "M9 36 Q25 5 44 36 T80 36 Q63 5 44 36 T9 36Z",
   bits: "M18 27v18 M37 27h12v18H37z M68 27v18",
   mouse: "M13 53Q18 29 44 32Q37 14 51 16Q62 17 58 33L76 45L62 51Q44 57 26 52Q7 64 7 48 M62 39h2",
@@ -53,13 +47,23 @@ function makeCover(book) {
   const body = element("span", "book-body");
   body.setAttribute("aria-hidden", "true");
   const face = element("span", "book-face");
-  const figure = document.createElementNS(ns, "svg");
-  figure.setAttribute("viewBox", "0 0 90 72");
-  figure.setAttribute("class", "cover-figure");
-  const path = document.createElementNS(ns, "path");
-  path.setAttribute("d", motifs[book.motif]);
-  figure.append(path);
-  face.append(element("span", "cover-title", book.cover || book.title), figure);
+  if (book.coverImage) {
+    const image = element("img", "jacket");
+    image.alt = "";
+    image.referrerPolicy = "no-referrer";
+    image.addEventListener("error", () => image.remove(), { once: true });
+    image.src = book.coverImage;
+    face.append(element("span", "cover-title", book.order[0]), image);
+    button.title = book.order[0] + " · " + book.title;
+  } else {
+    const figure = document.createElementNS(ns, "svg");
+    figure.setAttribute("viewBox", "0 0 90 72");
+    figure.setAttribute("class", "cover-figure");
+    const path = document.createElementNS(ns, "path");
+    path.setAttribute("d", motifs[book.motif]);
+    figure.append(path);
+    face.append(element("span", "cover-title", book.title), figure);
+  }
   body.append(element("span", "book-back"), element("span", "book-edge"),
     element("span", "book-head"), element("span", "book-spine"), face);
   button.append(body);
@@ -103,6 +107,15 @@ function openBook(book, shelf, button) {
   document.querySelector("#reader-title").textContent = book.title;
   document.querySelector("#reader-shelf").textContent = book.author ? book.author + " · Series guide" : shelf;
   document.querySelector("#reader-subtitle").textContent = book.subtitle || "A spoiler-free reading guide.";
+  const cover = document.querySelector("#reader-cover");
+  cover.hidden = !book.coverImage;
+  if (book.coverImage) {
+    cover.alt = book.order[0] + " cover";
+    cover.src = book.coverImage;
+  } else {
+    cover.removeAttribute("src");
+    cover.alt = "";
+  }
   reader.className = book.binding;
   showPage();
   reader.showModal();
@@ -141,15 +154,7 @@ function renderShelves(shelves) {
   }
 }
 
-const collections = { fantasy: fantasyShelves, engineering: engineeringShelves };
-const choices = document.querySelectorAll(".library-choices button");
-for (const choice of choices) {
-  choice.addEventListener("click", () => {
-    for (const option of choices) option.setAttribute("aria-pressed", String(option === choice));
-    renderShelves(collections[choice.dataset.collection]);
-  });
-}
-renderShelves(fantasyShelves);
+renderShelves([fantasyShelf, ...engineeringShelves]);
 previous.addEventListener("click", () => turn(-1));
 next.addEventListener("click", () => turn(1));
 document.querySelector("#close-book").addEventListener("click", () => reader.close());
