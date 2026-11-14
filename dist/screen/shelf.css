@@ -1,6 +1,6 @@
 .screen-rack {
-  display:grid; grid-auto-flow:column; grid-auto-columns:minmax(65px,1fr);
-  align-items:start; gap:clamp(8px,1.5vw,13px); padding:20px 15px 8px;
+  display:grid; grid-auto-flow:column; grid-auto-columns:clamp(65px,calc((100% - 56px) / 8),76px);
+  align-items:start; justify-content:safe center; gap:8px; padding:18px 13px 12px;
   overflow-x:auto; overscroll-behavior-x:contain; scroll-snap-type:x proximity;
   scrollbar-width:thin; scrollbar-color:#977953 #2c211a;
 }

@@ -58,10 +58,20 @@
     </section>
     <section class="library" id="library" aria-labelledby="library-title">
       <h2 id="library-title">Library<span class="accent">.</span></h2>
-      <p>Pick a book to open it, or pull out a case for viewing notes.</p>
+      <p>Open a drawer, then choose a book or a case.</p>
       <div class="cabinet" id="bookcase">
-        <div id="book-shelves"></div>
-        <div id="screen-shelf"></div>
+        <details class="drawer reading-list" name="library-drawer" open>
+          <summary><span class="drawer-tab" aria-hidden="true"></span><span>Intended to Read</span></summary>
+          <div id="intended-to-read"></div>
+        </details>
+        <details class="drawer book-collection" name="library-drawer">
+          <summary><span class="drawer-tab" aria-hidden="true"></span><span>Book collection<small>Fantasy &amp; engineering</small></span></summary>
+          <div id="book-shelves"></div>
+        </details>
+        <details class="drawer screen-collection" name="library-drawer">
+          <summary><span class="drawer-tab" aria-hidden="true"></span><span>Screen collection<small>Movies, TV series &amp; anime</small></span></summary>
+          <div id="screen-shelf"></div>
+        </details>
       </div>
       <noscript>The interactive bookshelf requires JavaScript.</noscript>
     </section>

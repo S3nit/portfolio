@@ -2,7 +2,8 @@ import { shelves as engineeringShelves } from "./books.js";
 import { fantasyShelf } from "./fantasy.js";
 import { intendedShelf } from "./intended.js";
 
-const cabinet = document.querySelector("#book-shelves");
+const bookShelves = document.querySelector("#book-shelves");
+const readingList = document.querySelector("#intended-to-read");
 const reader = document.querySelector("#reader");
 const leaf = document.querySelector("#leaf");
 const previous = document.querySelector("#previous-page");
@@ -140,24 +141,41 @@ function turn(delta) {
   }
 }
 
-function renderShelves(shelves) {
-  cabinet.replaceChildren();
-  for (const shelf of shelves) {
-    const row = element("section", "shelf");
-    if (shelf.id) row.id = shelf.id;
-    const label = element("h3", "shelf-label", shelf.name);
-    const group = element("div", "book-row");
-    for (const book of shelf.books) {
-      const button = makeCover(book);
-      button.addEventListener("click", () => openBook(book, shelf.name, button));
+function renderShelf(shelf, mount, isReadingList = false) {
+  const row = element("div", "shelf");
+  const group = element("div", "book-row");
+  shelf.books.forEach((book, index) => {
+    const button = makeCover(book);
+    button.addEventListener("click", () => openBook(book, shelf.name, button));
+    if (isReadingList) {
+      button.id = "reading-pick-" + index;
+      const caption = element("label", "book-caption", book.title);
+      caption.htmlFor = button.id;
+      const pick = element("div", "reading-pick");
+      pick.append(button, caption);
+      group.append(pick);
+    } else {
       group.append(button);
     }
-    row.append(group, label);
-    cabinet.append(row);
-  }
+  });
+  row.append(group);
+  if (!isReadingList) row.append(element("h3", "shelf-label", shelf.name));
+  mount.append(row);
 }
 
-renderShelves([fantasyShelf, intendedShelf, ...engineeringShelves]);
+renderShelf(intendedShelf, readingList, true);
+for (const shelf of [fantasyShelf, ...engineeringShelves]) renderShelf(shelf, bookShelves);
+
+function revealLinkedDrawer() {
+  const target = document.getElementById(location.hash.slice(1));
+  const drawer = target?.closest("#bookcase details");
+  if (drawer && !drawer.open) {
+    drawer.open = true;
+    drawer.scrollIntoView({ block: "start" });
+  }
+}
+revealLinkedDrawer();
+window.addEventListener("hashchange", revealLinkedDrawer);
 previous.addEventListener("click", () => turn(-1));
 next.addEventListener("click", () => turn(1));
 document.querySelector("#close-book").addEventListener("click", () => reader.close());
