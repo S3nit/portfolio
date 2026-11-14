@@ -11,6 +11,8 @@
   <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="./library/library.css?v=centered-kitten">
   <script type="module" src="./library/library.js"></script>
+  <link rel="stylesheet" href="./library/entrance.css">
+  <script type="module" src="./library/entrance.js"></script>
   <link rel="stylesheet" href="./screen/shelf.css">
   <script type="module" src="./screen/shelf.js"></script>
 </head>
@@ -56,7 +58,7 @@
         </div>
       </div>
     </section>
-    <section class="library" id="library" aria-labelledby="library-title">
+    <section class="library" id="library" tabindex="-1" aria-labelledby="library-title">
       <h2 id="library-title">Library<span class="accent">.</span></h2>
       <p>Open a drawer, then choose a book or a case.</p>
       <div class="cabinet" id="bookcase">
@@ -100,5 +102,12 @@
       </div>
     </dialog>
   </main>
+  <div class="library-folio" aria-hidden="true" inert hidden>
+    <div class="folio-leaf back-leaf"></div>
+    <div class="folio-leaf front-leaf"></div>
+    <div class="folio-cover">
+      <div class="folio-stamp"><i></i><span>Library</span><small>S3n;t</small></div>
+    </div>
+  </div>
 </body>
 </html>

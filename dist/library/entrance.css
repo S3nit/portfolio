@@ -1,0 +1,56 @@
+.library-folio {
+  position:fixed; inset:0; z-index:20; overflow:hidden; pointer-events:none;
+  perspective:160vw; perspective-origin:30% 47%;
+}
+.library-folio > div {
+  position:absolute; inset:-2px; transform-origin:2% center;
+  backface-visibility:hidden; will-change:transform;
+}
+.folio-cover {
+  display:grid; place-items:center; color:#e9cf94;
+  background:
+    linear-gradient(90deg,#0c1913 1%,#6d8261 2%,#233d31 3%,transparent 4%),
+    radial-gradient(ellipse at 70% 20%,#72855e40,transparent 68%),
+    repeating-linear-gradient(83deg,#e5e5c809 0 1px,transparent 1px 3px),
+    repeating-linear-gradient(2deg,#07120c22 0 1px,transparent 1px 3px),#243d31;
+  box-shadow:inset 0 0 70px #081a1177,5px 0 18px #12150f49;
+}
+.folio-cover::before,.folio-cover::after {
+  content:""; position:absolute; inset:6% 5%; border:1px solid #caae6c85;
+}
+.folio-cover::after { inset:calc(6% + 5px) calc(5% + 5px); border-color:#caae6c45; }
+.folio-stamp { display:grid; justify-items:center; gap:12px; text-shadow:0 1px #362912; }
+.folio-stamp span { font:italic 500 clamp(66px,11vw,160px)/1 Georgia,serif; letter-spacing:-.075em; }
+.folio-stamp small { font:15px/1.5 Georgia,serif; letter-spacing:.16em; }
+.folio-stamp i {
+  width:28px; aspect-ratio:1; background:#d7bb80;
+  clip-path:polygon(50% 0,56% 39%,83% 17%,63% 45%,100% 50%,62% 56%,83% 83%,55% 64%,50% 100%,44% 64%,17% 83%,37% 55%,0 50%,37% 44%,17% 17%,45% 39%);
+}
+.folio-leaf {
+  background:linear-gradient(90deg,#8a765a,#cfbfa2 3%,#e6d7bb 9%,#d9c7a6 77%,#bba787);
+  box-shadow:inset -2px 0 #a78d65,5px 0 24px #21180e55;
+}
+.front-leaf { background:linear-gradient(100deg,#988469,#e8d9be 10%,#ddceaf 58%,#c5b18f); }
+.folio-leaf::after { content:""; position:absolute; inset:8% 7%; border:1px solid #9c855341; }
+
+@media (prefers-reduced-motion:no-preference) {
+  .library-folio.arriving { animation:folio-arrive 300ms cubic-bezier(.38,.03,.25,1) both; }
+  .library-folio.opening .folio-cover { animation:folio-turn 640ms cubic-bezier(.52,.03,.28,1) both; }
+  .library-folio.opening .front-leaf { animation:folio-turn 650ms 100ms cubic-bezier(.48,.03,.25,1) both; }
+  .library-folio.opening .back-leaf { animation:folio-turn 700ms 180ms cubic-bezier(.44,.03,.2,1) both; }
+  .library.shelf-arrival .cabinet { animation:shelf-settle 670ms cubic-bezier(.2,.78,.22,1) both; }
+  .library.shelf-arrival > h2 { animation:title-settle 480ms ease-out both; }
+}
+@keyframes folio-arrive {
+  from { clip-path:inset(100% 0 0); }
+  to { clip-path:inset(0); }
+}
+@keyframes folio-turn {
+  0% { transform:rotateY(0); }
+  100% { transform:rotateY(-115deg); }
+}
+@keyframes shelf-settle {
+  from { opacity:.48; transform:perspective(1000px) translateY(20px) rotateX(2deg) scale(.985); }
+  to { opacity:1; transform:none; }
+}
+@keyframes title-settle { from { opacity:.4; transform:translateY(7px); } to { opacity:1; transform:none; } }
