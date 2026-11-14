@@ -11,6 +11,8 @@
   <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="./library/library.css">
   <script type="module" src="./library/library.js"></script>
+  <link rel="stylesheet" href="./screen/shelf.css">
+  <script type="module" src="./screen/shelf.js"></script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -60,6 +62,13 @@
       <div class="cabinet" id="bookcase"></div>
       <noscript>The interactive bookshelf requires JavaScript.</noscript>
     </section>
+    <section id="screen-shelf" class="screen-shelf" aria-labelledby="screen-title" hidden>
+      <h2 id="screen-title">Screen Shelf<span class="accent">.</span></h2>
+    </section>
+    <dialog id="screen-viewer" class="screen-viewer" aria-labelledby="pick-title">
+      <form method="dialog"><button aria-label="Close viewing notes" autofocus>Close ×</button></form>
+      <div class="screen-card"></div>
+    </dialog>
     <dialog id="reader" aria-labelledby="reader-title">
       <div class="reader-toolbar"><span>Library</span><button type="button" id="close-book" autofocus>Close book <span aria-hidden="true">×</span></button></div>
       <div class="spread">
