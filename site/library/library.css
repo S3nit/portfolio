@@ -1,15 +1,17 @@
 .library-jump { margin-left: 24px; }
-.library { margin-top: clamp(52px, 8vw, 100px); padding-top: 28px; border-top: 1px solid var(--line); }
-.library > h2 { font: 400 clamp(46px,6vw,76px)/1 Georgia,serif; letter-spacing: -.065em; }
-.library > p { margin: 12px 0 28px; }
+.library { margin-top: clamp(38px, 6vw, 72px); padding-top: 22px; border-top: 1px solid var(--line); }
+.library > h2 { font: 400 clamp(37px,5vw,55px)/1 Georgia,serif; letter-spacing: -.065em; }
+.library > p { margin: 9px 0 30px; }
 
 .cabinet {
   --wood: url("./walnut.webp");
-  padding: 9px 12px 0;
+  position: relative;
+  width: min(100%, 652px);
+  padding: 8px 10px 0;
   background: linear-gradient(90deg,#130d09aa,transparent 2%,transparent 98%,#190f0d88),var(--wood) center/cover;
   border: 1px solid #65513b;
   border-bottom: 6px solid #302219;
-  border-radius: 5px 5px 2px 2px;
+  border-radius: 12px 12px 5px 5px;
   box-shadow: 0 15px 27px -12px #000, inset 0 2px 2px #b89b775b;
 }
 .shelf {
@@ -20,8 +22,8 @@
 .book-row {
   display: flex; justify-content: space-evenly; align-items: flex-end;
   position: relative; isolation: isolate;
-  padding: clamp(25px,5vw,49px) clamp(6px,3vw,30px) 12px;
-  gap: clamp(4px,1vw,12px);
+  padding: 22px 12px 8px;
+  gap: clamp(2px,1vw,8px);
 }
 .book-row::before {
   content:""; position:absolute; z-index:-1; inset:auto 0 0; height:24px;
@@ -30,21 +32,21 @@
 }
 .shelf-label {
   position: relative;
-  margin:0 -5px; padding: 8px 10px 10px; text-align:center; color:#ecd9b7;
-  font: 500 12px/1.3 "Courier New",monospace; letter-spacing:.07em;
+  margin:0 -5px; padding: 4px 10px 5px; text-align:center; color:#ecd9b7;
+  font: 500 11px/1.3 "Courier New",monospace; letter-spacing:.07em;
   background:linear-gradient(#d1a4755c,transparent 9%,#140c0666 86%,#0c0908aa),var(--wood) 48% 30%/cover;
   border-top:1px solid #ae8e69; border-bottom:3px solid #2c2019;
   box-shadow:0 7px 9px #07040399; z-index:1; text-shadow:0 1px 2px #100a06;
 }
-.moss { --cloth:#365245; --foil:#e8d8ad; --angle:-11deg; }
+.moss { --cloth:#476353; --foil:#e8d8ad; --angle:-11deg; }
 .clay { --cloth:#8e4d3d; --foil:#fae4be; --angle:-7deg; }
 .indigo { --cloth:#404357; --foil:#e6d6ba; --angle:-14deg; }
-.ocean { --cloth:#30505d; --foil:#d7e4dc; --angle:-9deg; }
+.ocean { --cloth:#426575; --foil:#d7e4dc; --angle:-9deg; }
 .wine { --cloth:#6b3945; --foil:#f1d0a5; --angle:-15deg; }
 .ochre { --cloth:#94703b; --foil:#fff1ca; --angle:-6deg; }
 .volume {
-  --depth:clamp(10px,1.6vw,18px);
-  position:relative; width:clamp(62px,18.6vw,162px); aspect-ratio: .7;
+  --depth:clamp(4px,.8vw,9px);
+  position:relative; width:clamp(50px,12.5vw,101px); min-height:69px; aspect-ratio: .73;
   border:0; padding:0; color:var(--foil); background:transparent;
   perspective:730px; cursor:pointer; -webkit-tap-highlight-color:transparent;
 }
@@ -73,14 +75,14 @@
 .book-face {
   transform:translateZ(var(--depth));
   display:flex; flex-direction:column; justify-content:space-between; align-items:center;
-  padding:clamp(9px,2.4vw,24px) 12% 12% 16%;
+  padding:12% 9% 10% 14%;
   background-image:linear-gradient(90deg,#0008,transparent 3%,#fff2 5%,#0005 7%,transparent 10%,transparent 94%,#0003),
     repeating-linear-gradient(0deg,#fff1 0px,transparent 1px,transparent 3px),
     repeating-linear-gradient(90deg,#0002 0px,transparent 1px,transparent 3px);
   box-shadow:inset 0 0 1px 1px #fff3;
 }
 .book-face::before { content:""; position:absolute; inset:5% 6% 5% 10%; border:1px solid currentColor; opacity:.51; }
-.cover-title { font:400 clamp(12px,2.65vw,29px)/1.04 Georgia,serif; letter-spacing:-.045em; text-wrap:balance; text-shadow:0 1px 1px #0007; }
+.cover-title { font:400 clamp(12px,2.1vw,19px)/1.04 Georgia,serif; letter-spacing:-.045em; text-wrap:balance; text-shadow:0 1px 1px #0007; }
 .cover-figure { width:80%; height:45%; fill:none; stroke:currentColor; stroke-width:1.05; opacity:.94; }
 .book-edge,.book-spine {
   top:2px; bottom:2px; width:var(--depth); right:2px;
@@ -91,6 +93,30 @@
 .book-head {
   left:2px; right:2px; top:1px; height:var(--depth); transform-origin:top; transform:rotateX(90deg);
   background:repeating-linear-gradient(#ad9d80 0px,#eadfc7 1px,#cfc2a4 2px);
+}
+/* Pocket editions sit spine-out next to the illustrated hardbacks. */
+.mint { --cloth:#a4c5a9; --foil:#253e32; --angle:5deg; }
+.lilac { --cloth:#baa7ce; --foil:#392a4d; --angle:-8deg; }
+.peach { --cloth:#dbac99; --foil:#482e27; --angle:-4deg; }
+.apricot { --cloth:#e5be82; --foil:#493518; --angle:4deg; }
+.periwinkle { --cloth:#a4b6d4; --foil:#263952; --angle:-7deg; }
+.sage { --cloth:#abc0a4; --foil:#2c422e; --angle:-4deg; }
+.volume.pocket { width:clamp(29px,5.3vw,46px); height:clamp(88px,14vw,119px); flex:none; }
+.pocket .book-face { padding:7px 2px; justify-content:space-evenly; border-radius:4px; }
+.pocket .book-face::before { inset:4px 3px; border-width:1px 0; }
+.pocket .cover-title { writing-mode:vertical-rl; font-size:clamp(12px,1.8vw,16px); line-height:1; text-shadow:none; white-space:nowrap; }
+.pocket .cover-figure { width:75%; height:19px; stroke-width:3; flex:none; }
+.pocket:nth-child(5) { height:clamp(91px,15vw,125px); }
+.cabinet::before {
+  content:""; position:absolute; right:25px; bottom:100%; width:57px; height:33px;
+  background:url("./shelf-cat.svg") center bottom / contain no-repeat;
+}
+@media (max-width:460px) {
+  .book-row { padding:16px 4px 7px; gap:2px; }
+  .volume:not(.pocket) { min-width:0; flex:1 1 54px; max-width:62px; }
+  .book-face { padding:9px 4px 6px; }
+  .cover-title { font-size:12px; }
+  .cabinet::before { right:14px; width:46px; height:28px; }
 }
 .reading { overflow:hidden; }
 #reader {

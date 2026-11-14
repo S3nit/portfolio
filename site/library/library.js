@@ -9,6 +9,12 @@ const number = document.querySelector("#page-number");
 
 const ns = "http://www.w3.org/2000/svg";
 const motifs = {
+  loop: "M9 36 Q25 5 44 36 T80 36 Q63 5 44 36 T9 36Z",
+  bits: "M18 27v18 M37 27h12v18H37z M68 27v18",
+  mouse: "M13 53Q18 29 44 32Q37 14 51 16Q62 17 58 33L76 45L62 51Q44 57 26 52Q7 64 7 48 M62 39h2",
+  echo: "M22 32h9l10-9v26l-10-9h-9z M50 27q12 9 0 18 M59 21q19 15 0 30",
+  moon: "M57 13A25 25 0 1 0 71 48A26 26 0 0 1 57 13Z M68 15v8m-4-4h8",
+  nest: "M14 40Q43 74 76 40Q43 54 14 40Z M25 47q19 12 41 0 M30 39q-4-17 5-18q10 1 8 19 M45 40q-2-14 5-15q9 0 9 14",
   circuit: "M8 53H26V22H39L43 16L48 28L54 16L60 28L65 22H79V53H64 M63 41V65 M56 46V60 M55 53H8",
   field: Array.from({length: 13}, (_, i) => {
     const y = 7 + i * 5;
@@ -34,6 +40,7 @@ function element(tag, className, text) {
 function makeCover(book) {
   const button = element("button", "volume " + book.binding);
   button.type = "button";
+  if (book.pocket) button.classList.add("pocket");
   button.setAttribute("aria-label", "Read " + book.title);
   button.setAttribute("aria-haspopup", "dialog");
   const body = element("span", "book-body");

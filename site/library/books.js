@@ -29,6 +29,33 @@ export const shelves = [
           ["The time constant", "Multiply resistance in ohms by capacitance in farads. The result, RC, is a time in seconds. A 10 kΩ resistor and a 100 μF capacitor give a time constant of one second.", "After one time constant, the capacitor has covered about 63 percent of the journey from its starting voltage to its final voltage. After the next second it covers 63 percent of the remaining distance."],
           ["A different ending", "Disconnect the source and place a resistor across the charged capacitor. The voltage now decays. The initial field between the plates held energy; the resistor converts that energy into heat.", "For an ideal capacitor that stored energy is ½CV². Doubling the voltage at a fixed capacitance therefore stores four times as much energy."]
         ]
+      },
+      {
+        title: "Little Loops", binding: "mint", motif: "loop", pocket: true,
+        subtitle: "Two paths through one circuit.",
+        chapters: [
+          ["The fork", "Draw a battery and follow the wire with your pencil. At a junction, give your pencil two possible paths back to the battery. You have just drawn parallel branches."],
+          ["A fair split", "Put the same resistor in both branches. Each resistor sees the same voltage, so each takes the same current. The battery supplies their sum."],
+          ["A different pair", "Double just one resistance. At the same voltage, its branch current halves. The other branch still sees the original voltage when the source is ideal."]
+        ]
+      },
+      {
+        title: "Bit by Bit", binding: "lilac", motif: "bits", pocket: true,
+        subtitle: "Counting with three tiny switches.",
+        chapters: [
+          ["Two choices", "Imagine a row of three lamps. Give their positions the values four, two, and one. A glowing lamp contributes its value. A dark lamp contributes zero."],
+          ["Make a five", "Light the four and the one. The row now reads 101, or five. To make six, leave four on, turn one off, and light two."],
+          ["One more lamp", "With all three lamps on, you get seven. To count one step further, add a lamp worth eight on the left. Eight is 1000: one new light and three dark ones."]
+        ]
+      },
+      {
+        title: "Magnet Mouse", binding: "peach", motif: "mouse", pocket: true,
+        subtitle: "A compass takes a walk around a magnet.",
+        chapters: [
+          ["A tiny pointer", "Imagine a mouse carrying a compass past a bar magnet. At each stopping place the needle turns, then settles. The mouse draws a short arrow pointing where the north-seeking end points."],
+          ["Join the trail", "The mouse takes small steps in the direction of each arrow. Outside the magnet, the trail curves from near its north pole toward its south pole when the magnet dominates the surrounding field."],
+          ["Turn the magnet", "Keep the little compass in one place and reverse the bar magnet. After a wobble the needle points roughly the other way. The mouse updates the arrow on the map."]
+        ]
       }
     ]
   },
@@ -60,6 +87,33 @@ export const shelves = [
           ["Start with the scales", "A trace spans four vertical divisions from its lowest point to its highest. At 0.5 V per division, that is 2 V peak to peak. The same drawing at a different scale could describe a very different voltage.", "Write the vertical and horizontal scales beside any sketch. Without them you have preserved a shape and lost the measurement."],
           ["Holding still", "A repetitive signal seems stationary when each displayed sweep starts at the same feature. A rising-edge trigger can start the sweep as the signal rises through a chosen level.", "Move the trigger level outside the signal range and a normal triggered sweep has no qualifying event. A missing update can be a clue about the trigger setting."],
           ["Question the picture", "Suppose a short pulse looks like a smooth hill. Is the source producing a hill, or is the measurement system rounding a sharper edge? The trace alone does not decide.", "Change one condition at a time: the time scale, the sampling setting, or the instrument bandwidth. Record which features persist. A good bench note includes both the observation and how it was obtained."]
+        ]
+      },
+      {
+        title: "Echo Post", binding: "apricot", motif: "echo", pocket: true,
+        subtitle: "Send a clap to a wall and time its reply.",
+        chapters: [
+          ["Out and back", "Clap beside a distant flat wall. The echo took two journeys: from you to the wall, and back to you. A stopwatch measures the whole trip."],
+          ["Half the distance", "Suppose the delay is a fifth of a second. At a sound speed of about 340 metres per second, the sound travelled about 68 metres. The wall was about 34 metres away."],
+          ["A second reply", "In a courtyard, another wall can return the clap later. Each arrival tells you about a path length. It takes more information to work out which wall sent which reply."]
+        ]
+      },
+      {
+        title: "Moon Clock", binding: "periwinkle", motif: "moon", pocket: true,
+        subtitle: "A pocket clock for thinking about phase.",
+        chapters: [
+          ["The dial", "Imagine one hand going round a clock face every second. Noon is your reference point. A quarter of a second later, the hand has turned a quarter circle."],
+          ["Two hands", "Give a second clock the same speed, but start its hand at three. The hands keep their separation. They have the same frequency and a quarter-turn phase difference."],
+          ["The shadow", "Shine an imaginary light across the dial. The hand tip’s shadow on a diameter slides to and fro. Even though the hand turns steadily, its shadow slows at each end before turning back."]
+        ]
+      },
+      {
+        title: "Noise Nest", binding: "sage", motif: "nest", pocket: true,
+        subtitle: "Finding a steady reading among small fluctuations.",
+        chapters: [
+          ["A handful of readings", "A sensor reports 9, 11, 10, 9 and 11 units while its input stays still. Their average is 10. Saving the individual readings also tells you how much they varied."],
+          ["A quieter average", "When the fluctuations are independent and centred on zero, averaging more readings tends to reduce their effect. A run of readings that all drift upward deserves a different explanation."],
+          ["A hidden offset", "Imagine every reading is two units too high because the instrument has an offset. Averaging can make the result look remarkably steady. Checking it against a known reference reveals the error."]
         ]
       }
     ]
