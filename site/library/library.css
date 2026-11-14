@@ -1,13 +1,14 @@
 .library-jump { margin-left: 24px; }
-.library { margin-top: clamp(38px, 6vw, 72px); padding-top: 22px; border-top: 1px solid var(--line); }
+.library { display:grid; grid-template-columns:minmax(0,1fr); justify-items:center; margin-top: clamp(38px, 6vw, 72px); padding-top: 22px; border-top: 1px solid var(--line); }
 .library > h2 { font: 400 clamp(37px,5vw,55px)/1 Georgia,serif; letter-spacing: -.065em; }
-.library > p { margin: 9px 0 30px; }
+.library > h2, .library > p { text-align:center; }
+.library > p { margin:9px 0 clamp(52px,7vw,70px); }
 
 .cabinet {
   --wood: url("./walnut.webp");
   position: relative;
   width: min(100%, 652px);
-  margin-inline: auto;
+  justify-self:center;
   padding: 13px clamp(8px,2vw,14px) 12px;
   background:linear-gradient(90deg,#160e0866,#e3b07922 1%,transparent 3%,transparent 97%,#0f090777),var(--wood) center/cover;
   border:1px solid #654b35; border-bottom:5px solid #39271b; border-radius:4px;
@@ -124,15 +125,14 @@
 .pocket .cover-figure { width:75%; height:19px; stroke-width:3; flex:none; }
 .pocket:nth-child(5) { height:clamp(91px,15vw,125px); }
 .cabinet::before {
-  content:""; position:absolute; right:25px; bottom:calc(100% + 4px); width:57px; height:33px;
-  background:url("./shelf-cat.svg") center bottom / contain no-repeat;
+  content:""; position:absolute; right:clamp(12px,5%,28px); bottom:calc(100% + 3px); width:clamp(50px,8vw,75px); height:clamp(47px,7.5vw,70px); pointer-events:none; z-index:1;
+  background:url("./kitten.webp") center bottom / contain no-repeat;
 }
 @media (max-width:460px) {
   .book-row { padding:16px 4px 7px; gap:2px; }
   .volume:not(.pocket) { min-width:0; flex:1 1 54px; max-width:62px; }
   .book-face { padding:9px 4px 6px; }
   .cover-title { font-size:12px; }
-  .cabinet::before { right:14px; width:46px; height:28px; }
 }
 .reading { overflow:hidden; }
 #reader {
